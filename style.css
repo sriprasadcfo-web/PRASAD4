@@ -101,17 +101,6 @@ body {
 .glow-border:hover::after {
   opacity: 1;
 }
-
-/* Background Animated Grid */
-.bg-grid-lines {
-  background-image:
-    linear-gradient(to right, var(--bg-grid-color) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--bg-grid-color) 1px, transparent 1px);
-  background-size: 50px 50px;
-  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
-}
-
 @keyframes grid-move {
   0% {
     background-position: 0 0;
