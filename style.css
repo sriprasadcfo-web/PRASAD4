@@ -1,0 +1,224 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* Tailwind v4 Configuration using CSS-first styling */
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-display: 'Outfit', var(--font-sans);
+  --font-mono: 'Fira Code', monospace;
+
+  --color-accent: var(--accent-color);
+  --color-accent-glow: var(--accent-glow);
+  --color-accent-dim: var(--accent-dim);
+
+  --color-dark-pure: #030406;
+  --color-dark-deep: #07080c;
+  --color-dark-card: #0d0f17;
+  --color-dark-border: #1a1e2d;
+
+  --animate-grid-move: grid-move 20s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-border-glow: border-glow 4s linear infinite;
+}
+
+:root {
+  /* Default Theme: Electric Blue */
+  --accent-color: #00d2ff;
+  --accent-glow: rgba(0, 210, 255, 0.15);
+  --accent-dim: rgba(0, 210, 255, 0.4);
+  --accent-rgb: 0, 210, 255;
+
+  --bg-grid-color: rgba(0, 210, 255, 0.03);
+
+  scroll-behavior: smooth;
+}
+
+:root.theme-gold {
+  /* Accent Theme: Cyber Gold */
+  --accent-color: #ffb700;
+  --accent-glow: rgba(255, 183, 0, 0.15);
+  --accent-dim: rgba(255, 183, 0, 0.4);
+  --accent-rgb: 255, 183, 0;
+
+  --bg-grid-color: rgba(255, 183, 0, 0.025);
+}
+
+/* Base custom styles and global adjustments */
+body {
+  background-color: var(--color-dark-deep);
+  color: #e2e8f0;
+  overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-pure);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Glow Utilities */
+.glow-text {
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.glow-box {
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, var(--accent-color), transparent, var(--accent-color));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+/* Background Animated Grid */
+.bg-grid-lines {
+  background-image:
+    linear-gradient(to right, var(--bg-grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes border-glow {
+
+  0%,
+  100% {
+    border-color: rgba(var(--accent-rgb), 0.2);
+  }
+
+  50% {
+    border-color: rgba(var(--accent-rgb), 0.6);
+  }
+}
+
+/* Custom interactive classes */
+.bento-card {
+  position: relative;
+  background: rgba(13, 15, 23, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(26, 30, 45, 0.8);
+  border-radius: 1rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(var(--accent-rgb), 0.06), transparent 40%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 10px 30px -10px rgba(var(--accent-rgb), 0.15);
+}
+
+/* Terminal Styling */
+.terminal-window {
+  background: #05060a;
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(var(--accent-rgb), 0.05);
+}
+
+.terminal-header {
+  background: #0b0d16;
+  border-bottom: 1px solid rgba(26, 30, 45, 0.8);
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: var(--accent-color);
+  animation: cursor-blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes cursor-blink {
+
+  from,
+  to {
+    background-color: transparent
+  }
+
+  50% {
+    background-color: var(--accent-color)
+  }
+}
+
+/* CSS Theme transition delay override */
+.transition-theme {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* Utility to clip text background gradients */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}

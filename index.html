@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sri Prasad | Enterprise Architect & Technology Consultant</title>
+  <meta name="description"
+    content="Personal brand website of Sri Prasad, an expert Enterprise Architect and Digital Transformation consultant. Explore services in strategic advising, architecture design, and modern technology.">
+
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @import "tailwindcss";
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+    @theme {
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --font-display: 'Outfit', var(--font-sans);
+      --font-mono: 'Fira Code', monospace;
+      
+      --color-accent: var(--accent-color);
+      --color-accent-glow: var(--accent-glow);
+      --color-accent-dim: var(--accent-dim);
+      
+      --color-dark-pure: #030406;
+      --color-dark-deep: #07080c;
+      --color-dark-card: #0d101d;
+      --color-dark-border: #1a1e30;
+      
+      --animate-grid-move: grid-move 20s linear infinite;
+      --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+      --animate-scan-line: scan-line 3s ease-in-out infinite;
+    }
+
+    :root {
+      /* Default Theme: Electric Blue */
+      --accent-color: #00d2ff;
+      --accent-glow: rgba(0, 210, 255, 0.15);
+      --accent-dim: rgba(0, 210, 255, 0.4);
+      --accent-rgb: 0, 210, 255;
+      --bg-grid-color: rgba(0, 210, 255, 0.025);
+    }
+
+    :root.theme-gold {
+      /* Accent Theme: Cyber Gold */
+      --accent-color: #ffb700;
+      --accent-glow: rgba(255, 183, 0, 0.15);
+      --accent-dim: rgba(255, 183, 0, 0.4);
+      --accent-rgb: 255, 183, 0;
+      --bg-grid-color: rgba(255, 183, 0, 0.02);
+    }
+
+    body {
+      background-color: var(--color-dark-deep);
+      color: #e2e8f0;
+      overflow-x: hidden;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      transition: background-color 0.5s ease, color 0.3s ease;
+    }
+
+    /* Glow Utilities */
+    .glow-text {
+      text-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .glow-box {
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    /* Background Grid Styling */
+    .bg-grid-lines {
+      background-image: 
+        linear-gradient(to right, var(--bg-grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--bg-grid-color) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+    }
+
+    @keyframes grid-move {
+      0% { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes scan-line {
+      0% { top: 0%; opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    /* Bento Card Layout styles */
+    .bento-card {
+      position: relative;
+      background: rgba(13, 16, 29, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(26, 30, 48, 0.7);
+      border-radius: 1.25rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(var(--accent-rgb), 0.07), transparent 60%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--accent-rgb), 0.35);
+      box-shadow: 0 10px 40px -10px rgba(var(--accent-rgb), 0.15);
+    }
+
+    /* Glassmorphism custom classes */
+    .glass-nav {
+      background: rgba(4, 5, 8, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(26, 30, 48, 0.5);
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background-color: var(--accent-color);
+      animation: cursor-blink 1s step-end infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes cursor-blink {
+      from, to { background-color: transparent }
+      50% { background-color: var(--accent-color) }
+    }
+
+    /* Custom Webkit Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030406;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1a1e30;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color);
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased text-slate-300">
+
+  <!-- Interactive Canvas Background for Hero Particles -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <canvas id="hero-canvas" class="w-full h-full opacity-60"></canvas>
+    <!-- Background slow glow orbs -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-glow"
+      style="animation-duration: 8s;"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-glow"
+      style="animation-duration: 12s; animation-delay: 2s;"></div>
+  </div>
+
+  <!-- Sticky Header / Navbar -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
+    <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero"
+        class="flex items-center space-x-2.5 font-display font-extrabold text-xl tracking-wider text-white">
+        <span>SRI</span>
+        <span class="text-accent flex items-center">PRASAD<span
+            class="w-1.5 h-1.5 rounded-full bg-accent ml-1 glow-box"></span></span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#about" class="text-sm font-medium hover:text-accent transition-colors duration-300">About</a>
+        <a href="#expertise" class="text-sm font-medium hover:text-accent transition-colors duration-300">Expertise</a>
+        <a href="#services" class="text-sm font-medium hover:text-accent transition-colors duration-300">Services</a>
+        <a href="#contact" class="text-sm font-medium hover:text-accent transition-colors duration-300">Contact</a>
+      </div>
+
+      <!-- Accent Theme Switcher & Actions -->
+      <div class="hidden md:flex items-center space-x-6">
+        <!-- Toggle Switch -->
+        <button id="theme-toggle-btn"
+          class="flex items-center justify-center p-2 rounded-lg bg-dark-card border border-dark-border hover:border-accent/50 transition-colors duration-300"
+          title="Switch Theme Palette">
+          <svg id="theme-icon-blue" class="w-5 h-5 text-accent block" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <svg id="theme-icon-gold" class="w-5 h-5 text-accent hidden" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M8.111 16.5a5 5 0 117.778 0M12 9v4h3" />
+          </svg>
+          <span class="text-xs font-mono font-semibold text-slate-400 ml-2 uppercase tracking-wider"
+            id="theme-label">Cyber Mode</span>
+        </button>
+
+        <a href="#contact"
+          class="relative group px-5 py-2.5 rounded-lg overflow-hidden border border-accent/40 font-mono text-xs uppercase tracking-wider text-white transition-all duration-300 hover:border-accent">
+          <span
+            class="absolute inset-0 w-full h-full bg-accent/10 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+          <span class="relative flex items-center space-x-1">
+            <span>Access System</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-ping"></span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobile-menu-btn"
+        class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none"
+        aria-label="Toggle menu">
+        <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="nav-line-1"></span>
+        <span class="w-6 h-0.5 bg-white transition-all duration-300" id="nav-line-2"></span>
+        <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="nav-line-3"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Navigation Panel -->
+    <div id="mobile-menu"
+      class="hidden md:hidden fixed inset-x-0 top-20 bg-dark-deep/95 border-b border-dark-border backdrop-blur-lg transition-all duration-300 py-6 px-6 flex flex-col space-y-6">
+      <a href="#about" class="mobile-link text-lg font-medium hover:text-accent transition-colors">About</a>
+      <a href="#expertise" class="mobile-link text-lg font-medium hover:text-accent transition-colors">Expertise</a>
+      <a href="#services" class="mobile-link text-lg font-medium hover:text-accent transition-colors">Services</a>
+      <a href="#contact" class="mobile-link text-lg font-medium hover:text-accent transition-colors">Contact</a>
+      <hr class="border-dark-border">
+
+      <!-- Mobile Theme Toggler -->
+      <div class="flex items-center justify-between">
+        <span class="text-sm font-medium">Palette Select</span>
+        <button id="mobile-theme-toggle"
+          class="flex items-center space-x-2 py-2 px-4 rounded bg-dark-card border border-dark-border text-accent">
+          <span class="text-xs font-mono uppercase tracking-widest text-slate-400" id="mobile-theme-label">Cyber
+            Mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
+    <!-- Animated background grid -->
+    <div class="absolute inset-0 bg-grid-lines z-0 animate-grid-move"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-dark-deep via-transparent to-dark-deep z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+      <!-- Hero Content -->
+      <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+        <div
+          class="inline-flex items-center space-x-2 py-1 px-3.5 rounded-full bg-accent/10 border border-accent/20 font-mono text-xs text-accent uppercase tracking-wider">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          <span>Enterprise Systems Architect</span>
+        </div>
+
+        <h1
+          class="font-display font-extrabold text-5xl sm:text-6xl xl:text-7xl text-white tracking-tight leading-[1.1]">
+          Engineering High Value <br class="hidden sm:inline">
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-accent/80 to-white glow-text">Technology
+            Solutions</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+          I am <span class="text-white font-medium">Sri Prasad</span>. I help growth companies and enterprise boards
+          scale architecture, mitigate technological risk, and design resilient systems that drive hundreds of millions
+          in business value.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4 font-mono text-sm">
+          <a href="#about"
+            class="w-full sm:w-auto px-8 py-4 rounded-xl bg-accent text-dark-pure font-bold hover:shadow-[0_0_25px_var(--accent-glow)] transition-all duration-300 text-center uppercase tracking-wider">
+            Explore Journey
+          </a>
+          <a href="#contact"
+            class="w-full sm:w-auto px-8 py-4 rounded-xl bg-transparent text-white font-semibold border border-dark-border hover:border-accent/50 hover:bg-white/5 transition-all duration-300 text-center uppercase tracking-wider flex items-center justify-center space-x-2">
+            <span>Initialize Contact</span>
+            <span class="text-accent">_</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Portrait Visual with Glowing Frame -->
+      <div class="lg:col-span-5 flex justify-center items-center">
+        <div class="relative w-full max-w-[280px] h-[370px] sm:max-w-none sm:w-[320px] sm:h-[450px] group">
+          <!-- Cyber HUD Frame Accents -->
+          <div
+            class="absolute -inset-4 border border-dark-border/50 rounded-2xl pointer-events-none group-hover:border-accent/20 transition-colors duration-500">
+          </div>
+
+          <!-- Top Left Tech Marker -->
+          <div class="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-accent/60 pointer-events-none"></div>
+          <span class="absolute -top-6 left-0 font-mono text-[10px] text-accent/50 select-none">SYS.INIT.77</span>
+
+          <!-- Top Right Tech Marker -->
+          <div class="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-accent/60 pointer-events-none">
+          </div>
+          <span class="absolute -top-6 right-0 font-mono text-[10px] text-slate-600 select-none">LOC_500.04</span>
+
+          <!-- Bottom Left Tech Marker -->
+          <div class="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-accent/60 pointer-events-none">
+          </div>
+
+          <!-- Bottom Right Tech Marker -->
+          <div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-accent/60 pointer-events-none">
+          </div>
+
+          <!-- Scanning Laser Line -->
+          <div
+            class="absolute left-0 w-full h-[2px] bg-accent/80 shadow-[0_0_8px_var(--accent-color)] z-20 pointer-events-none animate-scan-line">
+          </div>
+
+          <!-- Main Image container -->
+          <div
+            class="w-full h-full rounded-xl overflow-hidden border border-dark-border relative bg-dark-card shadow-[0_15px_40px_-20px_rgba(0,0,0,0.8)]">
+            <!-- Overlay Grid Pattern -->
+            <div
+              class="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_95%,rgba(0,210,255,0.05)_95%)] bg-[size:100%_16px] pointer-events-none z-10 opacity-70">
+            </div>
+            <!-- Color tint overlay -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-dark-pure via-transparent to-transparent opacity-90 z-10">
+            </div>
+            <!-- Dynamic Hover Color Tint -->
+            <div
+              class="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none">
+            </div>
+
+            <img src="assets/avatar.jpg" alt="Sri Prasad"
+              class="w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.9] group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700">
+
+            <!-- Floating overlay status info -->
+            <div class="absolute bottom-6 left-6 right-6 z-20 font-mono text-xs space-y-1">
+              <div class="text-white font-semibold tracking-wider uppercase">SRI PRASAD</div>
+              <div class="text-accent flex items-center space-x-2 select-none">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent animate-ping"></span>
+                <span class="uppercase tracking-widest text-[9px] font-bold">GRID_ONLINE_FEED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid About Section -->
+  <section id="about" class="py-24 relative overflow-hidden bg-dark-pure/30">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+      <!-- Section Header -->
+      <div class="text-center md:text-left space-y-4 mb-16">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">About The Architect</h2>
+        <h3 class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+          A Bento View of Journey & Professional Philosophy
+        </h3>
+        <p class="text-slate-400 max-w-2xl font-light">
+          Here is a high-level representation of my background, expertise, system architecture statistics, and
+          operational focus.
+        </p>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:auto-rows-[220px]">
+
+        <!-- Bento Card 1: Core Bio / Vision (2 Cols wide, 2 Rows high) -->
+        <div class="bento-card md:col-span-2 md:row-span-2 p-8 flex flex-col justify-between">
+          <div class="space-y-6">
+            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/20">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h4 class="font-display text-2xl font-bold text-white leading-snug">
+              Bridging Strategic Governance & Enterprise Software Engineering
+            </h4>
+            <p class="text-slate-400 font-light leading-relaxed text-sm">
+              With over 15 years in software engineering and executive architectural consulting, I guide technology
+              leaders away from costly microservice spaghetti and complex over-engineering. My goal is to maximize
+              availability and velocity while aligning development cycles with core business revenue objectives.
+            </p>
+          </div>
+          <div class="font-mono text-[10px] text-slate-500 uppercase tracking-widest pt-4">
+            MISSION // ZERO TECHNICAL DEBT
+          </div>
+        </div>
+
+        <!-- Bento Card 2: Core Expertise Metrics (1 Col wide, 1 Row high) -->
+        <div class="bento-card p-6 flex flex-col justify-between">
+          <div class="text-xs font-mono uppercase tracking-widest text-slate-500">SYSTEM STATS</div>
+          <div class="space-y-1">
+            <div class="text-4xl font-display font-extrabold text-white">15+</div>
+            <div class="text-xs font-semibold text-accent uppercase tracking-wider">Years Professional Experience</div>
+          </div>
+          <div class="text-[10px] text-slate-500 font-mono">2011 - Present</div>
+        </div>
+
+        <!-- Bento Card 3: Live Pulse Availability (1 Col wide, 1 Row high) -->
+        <div class="bento-card p-6 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase tracking-widest text-slate-500">Live Status</span>
+            <span class="flex h-2.5 w-2.5 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+            </span>
+          </div>
+          <div class="space-y-1">
+            <div class="text-lg font-display font-semibold text-white">Global Consulting</div>
+            <div class="text-xs text-slate-400">Bangalore, India (GMT +5:30)</div>
+          </div>
+          <div class="font-mono text-[10px] text-slate-500 uppercase">Available for select advisory roles</div>
+        </div>
+
+        <!-- Bento Card 4: Architecture Quote (1 Col wide, 1 Row high) -->
+        <div class="bento-card p-6 flex flex-col justify-between md:col-span-1">
+          <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
+            <span class="font-serif text-xl text-accent font-bold">“</span>
+          </div>
+          <p class="text-slate-300 font-light italic text-xs leading-relaxed">
+            "Simple architectures are deceptively difficult to design, but infinitely easier to scale."
+          </p>
+          <div class="text-[9px] font-mono text-slate-500 uppercase tracking-widest">— SRI'S PHILOSOPHY</div>
+        </div>
+
+        <!-- Bento Card 5: Certifications (1 Col wide, 1 Row high) -->
+        <div class="bento-card p-6 flex flex-col justify-between">
+          <div class="text-xs font-mono uppercase tracking-widest text-slate-500">ACCREDITATIONS</div>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-1.5 h-1.5 rounded-full bg-accent"></div>
+              <span class="text-xs font-medium text-white">TOGAF 9 Certified</span>
+            </div>
+            <div class="flex items-center space-x-2.5">
+              <div class="w-1.5 h-1.5 rounded-full bg-accent"></div>
+              <span class="text-xs font-medium text-white">AWS Sol. Architect Prof.</span>
+            </div>
+            <div class="flex items-center space-x-2.5">
+              <div class="w-1.5 h-1.5 rounded-full bg-accent"></div>
+              <span class="text-xs font-medium text-white">Professional Scrum Master</span>
+            </div>
+          </div>
+          <div class="text-[9px] text-slate-600 font-mono">VERIFIED BADGES</div>
+        </div>
+
+        <!-- Bento Card 6: Core Technologies & Stack (4 Cols wide, 1 Row high) -->
+        <div class="bento-card md:col-span-4 p-6 flex flex-col justify-between">
+          <div class="text-xs font-mono uppercase tracking-widest text-slate-500">Domain Specializations</div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 my-2">
+            <div>
+              <div class="text-xs font-semibold text-white mb-2">Systems & Infrastructure</div>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">Kubernetes</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">AWS
+                  / GCP</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">Hybrid
+                  Cloud</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-semibold text-white mb-2">Integration & Messaging</div>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">Kafka
+                  / Event Broker</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">gRPC
+                  & REST</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">API
+                  Gateways</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-semibold text-white mb-2">Patterns & Practices</div>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">Domain-Driven
+                  (DDD)</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">CQRS
+                  & Event Sourcing</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">Microservices</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-semibold text-white mb-2">Security & Governance</div>
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">Zero-Trust
+                  IAM</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">OAuth
+                  / OpenID</span>
+                <span
+                  class="px-2 py-0.5 rounded bg-dark-border text-[10px] font-mono text-slate-400 border border-slate-800">System
+                  Mapping</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[10px] font-mono text-slate-500 uppercase tracking-widest pt-2">
+            ENGINEERING CAPABILITIES // INTEGRATION MATRIX
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Services & Expertise Section -->
+  <section id="expertise" class="py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+      <!-- Section Header -->
+      <div class="text-center space-y-4 mb-20">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">Service Operations</h2>
+        <h3 class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+          How I Support Growth and Enterprise Tech Teams
+        </h3>
+        <p class="text-slate-400 max-w-xl mx-auto font-light">
+          Highly specialized advisory plans targeting system scaling bottlenecks, software quality, and legacy
+          modernization roadmap planning.
+        </p>
+      </div>
+
+      <!-- Interactive Cards Grid -->
+      <div id="services" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <!-- Service Card 1 -->
+        <div class="bento-card p-8 flex flex-col justify-between h-[360px] group transition-all duration-300">
+          <div class="space-y-6">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/20 transition-all duration-300 group-hover:bg-accent group-hover:text-dark-pure text-accent">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+
+            <div class="space-y-3">
+              <h4
+                class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
+                Strategic Advisory</h4>
+              <p class="text-sm text-slate-400 font-light leading-relaxed">
+                Working alongside CTOs and engineering VPs to draft transformation blueprints, conduct feasibility
+                reviews, and define standard tech stacks.
+              </p>
+            </div>
+          </div>
+
+          <a href="#contact"
+            class="flex items-center space-x-2 text-xs font-mono uppercase font-semibold text-accent group-hover:underline">
+            <span>Query Specs</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="bento-card p-8 flex flex-col justify-between h-[360px] group transition-all duration-300">
+          <div class="space-y-6">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/20 transition-all duration-300 group-hover:bg-accent group-hover:text-dark-pure text-accent">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+            </div>
+
+            <div class="space-y-3">
+              <h4
+                class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
+                System Architecture</h4>
+              <p class="text-sm text-slate-400 font-light leading-relaxed">
+                Design and validation of distributed microservice blueprints, event-driven pipelines, CQRS pattern
+                schemas, and multi-tenant databases.
+              </p>
+            </div>
+          </div>
+
+          <a href="#contact"
+            class="flex items-center space-x-2 text-xs font-mono uppercase font-semibold text-accent group-hover:underline">
+            <span>Query Specs</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="bento-card p-8 flex flex-col justify-between h-[360px] group transition-all duration-300">
+          <div class="space-y-6">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/20 transition-all duration-300 group-hover:bg-accent group-hover:text-dark-pure text-accent">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+
+            <div class="space-y-3">
+              <h4
+                class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
+                Architecture Auditing</h4>
+              <p class="text-sm text-slate-400 font-light leading-relaxed">
+                In-depth audit of legacy infrastructure to diagnose performance bottlenecks, scalability pain-points,
+                cloud spend leakages, and compliance gaps.
+              </p>
+            </div>
+          </div>
+
+          <a href="#contact"
+            class="flex items-center space-x-2 text-xs font-mono uppercase font-semibold text-accent group-hover:underline">
+            <span>Query Specs</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="bento-card p-8 flex flex-col justify-between h-[360px] group transition-all duration-300">
+          <div class="space-y-6">
+            <div
+              class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center border border-accent/20 transition-all duration-300 group-hover:bg-accent group-hover:text-dark-pure text-accent">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+
+            <div class="space-y-3">
+              <h4
+                class="font-display text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
+                Fractional CTO Services</h4>
+              <p class="text-sm text-slate-400 font-light leading-relaxed">
+                Strategic tech oversight for growing startups: hiring roadmap guidance, engineering process
+                optimization, and leadership coaching.
+              </p>
+            </div>
+          </div>
+
+          <a href="#contact"
+            class="flex items-center space-x-2 text-xs font-mono uppercase font-semibold text-accent group-hover:underline">
+            <span>Query Specs</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Terminal & Contact Section -->
+  <section id="contact" class="py-24 relative overflow-hidden bg-dark-pure/20">
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+
+      <!-- Section Header -->
+      <div class="text-center space-y-4 mb-12">
+        <h2 class="font-mono text-xs uppercase tracking-widest text-accent font-semibold">Communication Protocol</h2>
+        <h3 class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+          Initialize Secure Connection
+        </h3>
+        <p class="text-slate-400 max-w-lg mx-auto font-light">
+          Use the futuristic command terminal below to initiate contact, or toggle to the traditional messaging form.
+        </p>
+      </div>
+
+      <!-- Dual-Mode Terminal Wrapper -->
+      <div class="terminal-window overflow-hidden transition-all duration-500">
+
+        <!-- Mockup Header -->
+        <div class="terminal-header px-4 py-3.5 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+            <span class="text-xs font-mono text-slate-500 ml-2 select-none">sh - visitor@sriprasad:~$</span>
+          </div>
+
+          <!-- Mode Toggle Button -->
+          <button id="form-mode-toggle"
+            class="flex items-center space-x-1.5 px-3 py-1 rounded bg-slate-900 border border-slate-800 hover:border-accent/50 text-xs font-mono font-medium text-slate-400 hover:text-accent transition-all duration-300">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            <span id="form-toggle-text">Classic UI</span>
+          </button>
+        </div>
+
+        <!-- Mode A: Terminal Box -->
+        <div id="terminal-interface"
+          class="p-6 font-mono text-sm min-h-[350px] flex flex-col justify-between bg-dark-pure text-accent select-text">
+
+          <!-- Output logs -->
+          <div class="space-y-4 overflow-y-auto max-h-[300px]" id="terminal-log">
+            <div>
+              <span class="text-slate-500">SYSTEM // INITIAL CONNECTION ESTABLISHED...</span><br>
+              <span class="text-white font-semibold">SRI PRASAD // PORTFOLIO SHELL v1.0.4</span><br>
+              <span class="text-slate-400">Type <span class="text-accent underline font-semibold">help</span> to get
+                started, or click the macros below.</span>
+            </div>
+          </div>
+
+          <!-- Interactive Input Line -->
+          <div class="mt-6 flex flex-col space-y-4">
+
+            <!-- Direct Prompt -->
+            <div class="flex items-center space-x-2">
+              <span class="terminal-prompt text-accent select-none">visitor@sriprasad:~$</span>
+              <span class="flex-1 flex items-center">
+                <input type="text" id="terminal-input"
+                  class="bg-transparent text-accent focus:outline-none border-none p-0 m-0 w-full font-mono text-sm leading-none"
+                  autofocus autocomplete="off" spellcheck="false">
+              </span>
+            </div>
+
+            <!-- Macros Helper Links -->
+            <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-900 select-none">
+              <span class="text-xs text-slate-500 flex items-center font-mono mr-1">Macros:</span>
+              <button onclick="executeMacro('help')"
+                class="px-2.5 py-1 rounded bg-slate-950 border border-slate-900 text-xs text-slate-400 hover:text-accent hover:border-accent/30 transition-all font-mono">[
+                help ]</button>
+              <button onclick="executeMacro('about')"
+                class="px-2.5 py-1 rounded bg-slate-950 border border-slate-900 text-xs text-slate-400 hover:text-accent hover:border-accent/30 transition-all font-mono">[
+                about ]</button>
+              <button onclick="executeMacro('services')"
+                class="px-2.5 py-1 rounded bg-slate-950 border border-slate-900 text-xs text-slate-400 hover:text-accent hover:border-accent/30 transition-all font-mono">[
+                services ]</button>
+              <button onclick="executeMacro('contact')"
+                class="px-2.5 py-1 rounded bg-slate-950 border border-slate-900 text-xs text-slate-400 hover:text-accent hover:border-accent/30 transition-all font-mono font-semibold">[
+                run contact_protocol ]</button>
+              <button onclick="executeMacro('clear')"
+                class="px-2.5 py-1 rounded bg-slate-950 border border-slate-900 text-xs text-slate-500 hover:text-white hover:border-white/20 transition-all font-mono">[
+                clear ]</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Mode B: Sleek UI Form (Hidden by default) -->
+        <div id="classic-form-interface" class="hidden p-8 bg-dark-card border-t border-dark-border">
+          <form id="contact-form" class="space-y-6" onsubmit="handleClassicSubmit(event)">
+            <!-- Wizard Progress Indicator -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-900 select-none">
+              <div class="flex items-center space-x-2">
+                <span class="text-[10px] font-mono uppercase tracking-widest text-slate-500">Transmission Protocol
+                  Stage:</span>
+                <span id="form-step-badge"
+                  class="px-2 py-0.5 rounded bg-accent/15 border border-accent/30 font-mono text-xs text-accent font-semibold">1
+                  / 3</span>
+              </div>
+              <div class="flex space-x-2" id="form-dots">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent transition-colors duration-300" id="form-dot-1"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-800 transition-colors duration-300"
+                  id="form-dot-2"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-800 transition-colors duration-300"
+                  id="form-dot-3"></span>
+              </div>
+            </div>
+
+            <!-- Step 1: Name Input -->
+            <div id="form-step-1" class="space-y-4 transition-all duration-300">
+              <div class="space-y-2">
+                <label for="form-name" class="font-mono text-xs text-slate-400 uppercase tracking-widest">Identify
+                  Yourself (Full Name)</label>
+                <input type="text" id="form-name"
+                  class="w-full bg-dark-pure border border-dark-border hover:border-accent/30 focus:border-accent focus:outline-none rounded-xl px-4 py-3.5 text-sm transition-colors duration-300"
+                  placeholder="John Doe" autocomplete="name">
+                <span id="error-name" class="text-xs font-mono text-red-500 hidden flex items-center space-x-1.5">
+                  <span>[!] Please provide a name.</span>
+                </span>
+              </div>
+              <div class="flex justify-end pt-2">
+                <button type="button" onclick="nextFormStep()"
+                  class="px-6 py-3.5 rounded-lg bg-accent text-dark-pure font-bold hover:shadow-[0_0_15px_var(--accent-glow)] transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+                  Continue &rarr;
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Email Input (Hidden by default) -->
+            <div id="form-step-2" class="hidden space-y-4 transition-all duration-300">
+              <div class="space-y-2">
+                <label for="form-email" class="font-mono text-xs text-slate-400 uppercase tracking-widest">Secure
+                  Callback Node (Email Address)</label>
+                <input type="email" id="form-email"
+                  class="w-full bg-dark-pure border border-dark-border hover:border-accent/30 focus:border-accent focus:outline-none rounded-xl px-4 py-3.5 text-sm transition-colors duration-300"
+                  placeholder="john@company.com" autocomplete="email">
+                <span id="error-email" class="text-xs font-mono text-red-500 hidden flex items-center space-x-1.5">
+                  <span>[!] Please enter a valid email address.</span>
+                </span>
+              </div>
+              <div class="flex justify-between pt-2">
+                <button type="button" onclick="prevFormStep()"
+                  class="px-6 py-3.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+                  &larr; Back
+                </button>
+                <button type="button" onclick="nextFormStep()"
+                  class="px-6 py-3.5 rounded-lg bg-accent text-dark-pure font-bold hover:shadow-[0_0_15px_var(--accent-glow)] transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+                  Continue &rarr;
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Message Input (Hidden by default) -->
+            <div id="form-step-3" class="hidden space-y-4 transition-all duration-300">
+              <div class="space-y-2">
+                <label for="form-message" class="font-mono text-xs text-slate-400 uppercase tracking-widest">Message
+                  Payload (Project Details)</label>
+                <textarea id="form-message" rows="4"
+                  class="w-full bg-dark-pure border border-dark-border hover:border-accent/30 focus:border-accent focus:outline-none rounded-xl px-4 py-3.5 text-sm transition-colors duration-300 resize-none"
+                  placeholder="Describe the scope of advisory or engineering project..."></textarea>
+                <span id="error-message" class="text-xs font-mono text-red-500 hidden flex items-center space-x-1.5">
+                  <span>[!] Please enter a message.</span>
+                </span>
+              </div>
+              <div class="flex justify-between pt-2">
+                <button type="button" onclick="prevFormStep()"
+                  class="px-6 py-3.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+                  &larr; Back
+                </button>
+                <button type="submit" id="form-submit-btn"
+                  class="px-8 py-3.5 rounded-lg bg-accent text-dark-pure font-bold hover:shadow-[0_0_20px_var(--accent-glow)] transition-all duration-300 font-mono text-xs uppercase tracking-wider">
+                  Transmit Message
+                </button>
+              </div>
+            </div>
+
+            <!-- Success/Feedback Indicators -->
+            <div id="form-status"
+              class="font-mono text-xs text-emerald-400 hidden flex items-center space-x-2 pt-2 select-none">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>Transmission Successful. Connection Closed.</span>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="py-16 relative border-t border-dark-border/60 bg-dark-pure/60">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+
+      <!-- Brand & Copy -->
+      <div class="md:col-span-4 space-y-3 text-center md:text-left">
+        <a href="#hero" class="font-display font-extrabold text-lg tracking-wider text-white">
+          SRI <span class="text-accent">PRASAD</span>
+        </a>
+        <p class="text-xs text-slate-500 font-mono">
+          &copy; 2026 Sri Prasad. All rights reserved. <br>
+          Enterprise Advisory Systems Group.
+        </p>
+      </div>
+
+      <!-- Email Clipboard Feature -->
+      <div class="md:col-span-5 flex flex-col items-center justify-center space-y-3">
+        <span class="font-mono text-[10px] text-slate-500 uppercase tracking-widest select-none">Secure Communication
+          Node</span>
+
+        <div
+          class="inline-flex items-center space-x-2 bg-dark-card border border-dark-border/80 px-4 py-2.5 rounded-xl max-w-full">
+          <span
+            class="font-mono text-xs text-slate-400 select-all overflow-x-auto truncate mr-2">contact@sriprasad.com</span>
+
+          <!-- Copy Button Container -->
+          <div class="relative flex items-center">
+            <button id="copy-email-btn"
+              class="p-2 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-accent hover:border-accent/50 transition-all duration-200"
+              title="Copy to Clipboard">
+              <!-- Uncopied SVG -->
+              <svg id="copy-icon" class="w-4 h-4 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+              </svg>
+              <!-- Copied Checked SVG -->
+              <svg id="check-icon" class="w-4 h-4 hidden text-emerald-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </button>
+            <!-- Tooltip -->
+            <div id="copy-tooltip"
+              class="absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-slate-950 border border-slate-800 rounded font-mono text-[10px] text-accent pointer-events-none opacity-0 transition-opacity duration-300 whitespace-nowrap">
+              Copied!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Connections -->
+      <div class="md:col-span-3 flex justify-center md:justify-end space-x-5">
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com" target="_blank"
+          class="p-2.5 rounded-xl bg-dark-card border border-dark-border text-slate-400 hover:text-accent hover:border-accent/50 transition-all duration-300"
+          aria-label="LinkedIn Profile">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg>
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com" target="_blank"
+          class="p-2.5 rounded-xl bg-dark-card border border-dark-border text-slate-400 hover:text-accent hover:border-accent/50 transition-all duration-300"
+          aria-label="GitHub Profile">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+        <!-- Twitter/X -->
+        <a href="https://twitter.com" target="_blank"
+          class="p-2.5 rounded-xl bg-dark-card border border-dark-border text-slate-400 hover:text-accent hover:border-accent/50 transition-all duration-300"
+          aria-label="Twitter/X Profile">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Link script.js -->
+  <script src="script.js"></script>
+</body>
+
+</html>
